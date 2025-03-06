@@ -1,0 +1,21 @@
+def f1(c, carry, i):
+    val = ord(c)
+    val += carry
+    val %= 256
+    val ^= ord(key[i % len(key)])
+    return val
+
+a = '23a326c27bee9b40885df97007aa4dbe410e93'
+b = bytes.fromhex(a)
+carry = 0
+key = "Awesome!"
+output = ''
+for i,c in enumerate(b):
+    for essai in range(32, 128):
+        val = f1(chr(essai), carry, i)
+        if val == c:
+            break
+    output += chr(essai)
+    carry += essai
+    carry %= 256
+print(output)
